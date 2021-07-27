@@ -4,7 +4,7 @@
 Create a relationship model for the Hotel
 
 ## Model
-![domain-model](./images/Lab11.JPG)
+![domain-model](./Images/Lab11.JPG)
 
 
 ## Created With Help From
