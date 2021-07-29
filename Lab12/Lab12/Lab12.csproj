@@ -12,9 +12,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Interfaces\" />
-    <Folder Include="Models\Services\" />
-  </ItemGroup>
-
 </Project>
