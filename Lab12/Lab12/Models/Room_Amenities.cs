@@ -8,14 +8,13 @@ namespace Lab12.Models
     //This is a join table
     public class Room_Amenities
     {
+        public int RoomId { get; set; }
+        public int AmenityId { get; set; }
+
+
         //bring in Room & Amenities Objects
-        public Room Rooms { get; set; }
+        public Room Room { get; set; }
         public Amenities Amenity { get; set; }
 
-        //bring in Amenities ID
-        public Amenities Amenity { get; set; }
-
-        //bring in Room ID
-        public Room Rooms { get; set; }
     }
 }

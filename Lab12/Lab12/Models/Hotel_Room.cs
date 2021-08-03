@@ -9,25 +9,15 @@ namespace Lab12.Models
     public class Hotel_Room
     {
         // bring in room & Hotel objects
-        public Room Rooms { get; set; }
-        public Hotel Hotels { get;set; }
+        public Room Room { get; set; }
+        public Hotel Hotel { get;set; }
 
-        //create Space for the Hotel ID
-        [Required]
-        public int HotelId { get; set; }
-
-        [Required]
         public int RoomNumber { get; set; }
-        
-        //create Space for the Room ID
-        [Required]
+        public int HotelId { get; set; }
         public int RoomId { get; set; }
-
-        [Required]
-        public decimal Rate { get; set; }
-
-        [Required]
-        public bool PetFriendly { get; set; }
+        //public int RoomNumber { get; set; }
+        //public decimal Rate { get; set; }
+        //public bool PetFriendly { get; set; }
 
 
 

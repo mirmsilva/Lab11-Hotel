@@ -10,18 +10,11 @@ namespace Lab12.Models
     {
         //This is the PK of each room
         public int Id { get; set; }
-
-        //bring in Room & Amenities Objects
-        public Room Rooms { get; set; }
-        public Amenities Amenity { get; set; }
-
-        [Required]
-        //Name of the hotel room
         public string Name { get; set; }
+        public RoomSize Size { get; set; }
 
-        [Required]
-        public RoomSize Size { get; set;}
-
+        public List<Hotel_Room> Hotel_Room { get; set; }
+        public List<Room_Amenities> Room_Amenities { get; set; }
 
     }
 }
