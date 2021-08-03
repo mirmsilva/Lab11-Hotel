@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab12.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,13 +12,13 @@ namespace Lab12.Models.Interfaces
         Task<Room> Create(Room room);
 
         //GET ALL
-        Task<List<Room>> GetRooms();
+        Task<List<RoomsDto>> GetRooms();
 
         //GET BY ID
-        Task<Room> GetRoom(int id);
+        Task<RoomsDto> GetRoom(int id);
 
         //UPDATE
-        Task<Room> UpdateRoom(int id, Room room);
+        Task<RoomsDto> UpdateRoom(int id, Room room);
         Task AddAmenityToRoom(int roomId, int amenityId);
 
         //DELETE

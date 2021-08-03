@@ -38,10 +38,8 @@ namespace Lab12
             services.AddTransient<IRoom, RoomServices>();
             services.AddTransient<IAmenities, AmenitiesServices>();
             services.AddTransient<IHotel_Room, Hotel_RoomServices>();
-
-            services.AddControllers();
-            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+            //this came from john on the demo code
+            services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

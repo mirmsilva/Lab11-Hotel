@@ -8,6 +8,7 @@ using Lab12.Data;
 using Lab12.Models;
 using Microsoft.EntityFrameworkCore;
 using Lab12.Models.Interfaces;
+using Lab12.Models.DTOs;
 
 namespace Lab12.Controllers
 {
@@ -23,8 +24,8 @@ namespace Lab12.Controllers
         }
 
         //GET LIST
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        [HttpGet("api/rooms/")]
+        public async Task<ActionResult<IEnumerable<RoomsDto>>> GetRooms()
         {   //used this before I had created services & Interfaces
             //return await _context.Room.ToListAsync();
             var list = await _room.GetRooms();
@@ -32,16 +33,16 @@ namespace Lab12.Controllers
         }
 
         //GET BY ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        [HttpGet("api/rooms/{roomId}")]
+        public async Task<ActionResult<RoomsDto>> GetRoom(int id)
         {
-            Room room = await _room.GetRoom(id);
+            RoomsDto room = await _room.GetRoom(id);
             return room; 
         }
 
         //PUT 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
+        [HttpPut("api/rooms/{roomId}")]
+        public async Task<IActionResult> PutRoom(int id, RoomsDto room)
         {
             if (id != room.Id)
             {
@@ -51,15 +52,15 @@ namespace Lab12.Controllers
             return Ok(updateRoom);
         }
         //POST
-        [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        [HttpPost("api/rooms/")]
+        public async Task<ActionResult<RoomsDto>> PostRoom(Room room)
         {
             await _room.Create(room);
             return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
 
         //DELETE
-        [HttpDelete("{id}")]
+        [HttpDelete("api/rooms/{roomId}")]
         public async Task<ActionResult<Room>> DeleteRoom(int id)
         {
             await _room.Delete(id);
@@ -77,7 +78,7 @@ namespace Lab12.Controllers
         }
         
         //DELETE AMENITY TO ROOM
-          [HttpDelete("{id}")]
+        [HttpDelete]
         [Route("{roomId}/Amenity/{amenityId}")]
         public async Task<ActionResult<Room>> DeleteAmenityToRoom(int roomId, int amenityId)
         {

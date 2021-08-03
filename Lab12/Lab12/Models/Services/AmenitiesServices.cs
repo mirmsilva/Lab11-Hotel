@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Lab12.Models.DTOs;
 
 namespace Lab12.Models.Services
 {
@@ -16,22 +17,22 @@ namespace Lab12.Models.Services
         {
             _context = context;
         }
-        public async Task<Amenities> Create(Amenities amenities)
+        public async Task<AmenitiesDto> Create(AmenitiesDto amenities)
         {
             _context.Entry(amenities).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return amenities;
         }
 
-        public async Task<List<Amenities>> GetAmenities()
+        public async Task<List<AmenitiesDto>> GetAmenities()
         {
-            var amenities = await _context.Amenities.ToListAsync();
+            AmenitiesDto amenities = await _context.Amenities.ToListAsync();
             return amenities;
         }
 
-        public async Task<Amenities> GetAmenity(int id)
+        public async Task<AmenitiesDto> GetAmenity(int id)
         {
-            Amenities amenity = await _context.Amenities.FindAsync(id);
+            AmenitiesDto amenity = await _context.Amenities.FindAsync(id);
             return amenity; 
         }
 

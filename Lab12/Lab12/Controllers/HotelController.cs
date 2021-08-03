@@ -11,6 +11,7 @@ using Lab12.Data;
 using Lab12.Models;
 using Microsoft.EntityFrameworkCore;
 using Lab12.Models.Interfaces;
+using Lab12.Models.DTOs;
 
 namespace Lab12.Controllers
 {
@@ -27,8 +28,8 @@ namespace Lab12.Controllers
         }
 
         //GET
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
+        [HttpGet("api/Hotels")]
+        public async Task<ActionResult<IEnumerable<HotelsDto>>> GetHotels()
         {
             //add a count to the list
             var list = await _hotel.GetHotels();
@@ -36,10 +37,10 @@ namespace Lab12.Controllers
         }
 
         //GET: api/Hotels/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Hotel>> GetHotel(int id)
+        [HttpGet("api/Hotels/{id}")]
+        public async Task<ActionResult<HotelsDto>> GetHotel(int id)
         {
-            Hotel hotel = await _hotel.GetHotel(id);
+            HotelsDto hotel = await _hotel.GetHotel(id);
             return hotel;
         }
 

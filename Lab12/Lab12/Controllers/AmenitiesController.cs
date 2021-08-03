@@ -8,6 +8,7 @@ using Lab12.Data;
 using Lab12.Models;
 using Microsoft.EntityFrameworkCore;
 using Lab12.Models.Interfaces;
+using Lab12.Models.DTOs;
 
 namespace Lab12.Controllers
 {
@@ -22,19 +23,19 @@ namespace Lab12.Controllers
             _amenity = a;
         }
 
-        //GET
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenities>>> GetAmenities()
+        //GET LIST
+        [HttpGet("api/amenities/")]
+        public async Task<ActionResult<IEnumerable<AmenitiesDto>>> GetAmenities()
         {
             var list = await _amenity.GetAmenities();
             return Ok(list);
         }
 
-        //GET
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Amenities>> GetAmenity(int id)
+        //GET BY ID
+        [HttpGet("api/amenities/{id}")]
+        public async Task<ActionResult<AmenitiesDto>> GetAmenity(int id)
         {
-            Amenities amenity = await _amenity.GetAmenity(id);
+            AmenitiesDto amenity = await _amenity.GetAmenity(id);
             return amenity;
         }
 
@@ -51,12 +52,12 @@ namespace Lab12.Controllers
 
         }
         //POST
-        [HttpPost]
+        [HttpPost("api/amenities/")]
         public async Task<ActionResult<Amenities>> PostAmenities(Amenities amenity)
         {
             await _amenity.Create(amenity);
 
-            return CreatedAtAction("GetAmenity", new { id = amenity.Id }, amenity);
+            return CreatedAtAction("GetAmenity", new { id =amenity.Id }, amenity);
         }
 
         //DELETE
