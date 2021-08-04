@@ -8,17 +8,20 @@ namespace Lab12.Models.Interfaces
 {
     public interface IRoom
     {
-        //CREATE
-        Task<Room> Create(Room room);
+        //CREATE - POST
+        //DTO - RoomsDTO
+        Task<RoomsDto> Create(Room room);
 
         //GET ALL
+        //DTO - GET RoomDto Objects
         Task<List<RoomsDto>> GetRooms();
 
         //GET BY ID
+        
         Task<RoomsDto> GetRoom(int id);
 
-        //UPDATE
-        Task<RoomsDto> UpdateRoom(int id, Room room);
+        //UPDATE - PUT
+        Task<Room> UpdateRoom(int id, Room room);
         Task AddAmenityToRoom(int roomId, int amenityId);
 
         //DELETE

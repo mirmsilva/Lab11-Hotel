@@ -5,39 +5,73 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Lab12.Data;
-
+using Lab12.Models.DTOs;
 
 namespace Lab12.Models.Services
 {
     public class RoomServices : IRoom
     {
         private HotelDbContext _context;
+        private IAmenities _amenities;
 
-        //CREATE
-        public async Task<Room> Create(Room room)
+        public RoomServices(HotelDbContext context, IAmenities amenities)
+        {
+            _context = context;
+            _amenities = amenities;
+        }
+        //CREATE - POST
+        //DTO - RoomsDTO in request
+        public async Task<RoomsDto> Create(Room room)
         {
             _context.Entry(room).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return room;
         }
 
-        //GET BY ID
-        public async Task<Room> GetRoom(int id)
+        //GET ALL
+        //DTO - GET RoomDto Objects
+        //SHOULD ALSO RETURN THE AMENITIES
+        //SHOULD THIS BE ROOM AMENITIES?
+        public async Task<List<RoomsDto>> GetRooms()
         {
-            return await _context.Room
-                .Include(r => r.Amenities)
-                .FirstOrDefaultAsync(ra => ra.Id = id);
-        }
-        
-        //GET LIST
-        public async Task<List<Room>> GetRooms()
-        {
-            return await _context.Room
-                .Include(r => r.Amenities)
-                .FirstOrDefaultAsync();
+            return await _context.Rooms
+                .Select(room => new RoomsDto
+                {
+                    ID = room.Id,
+                    Name = room.Name,
+                    RoomSize = room.Size,
+                    Amenities = room.Room_Amenities
+                    .Select(ra => new AmenitiesDto
+                    {
+                        Id = ra.Amenity.Id,
+                        Name = ra.Amenity.Name
+
+
+                    }).ToList()
+                }).ToListAsync();
         }
 
-        //UPDATE
+        //GET BY ID
+        //SHOULD ALSO RETURN THE AMENITIES
+        //SHOULD THIS BE ROOM AMENITIES?
+        public async Task<RoomsDto> GetRoom(int id)
+        {
+            return await _context.Rooms
+                .Select(room => new RoomsDto
+                {
+                    ID = room.Id,
+                    Name = room.Name,
+                    RoomSize = room.Size,
+                    Amenities = room.Room_Amenities
+                    .Select(ra => new AmenitiesDto
+                    {
+                        Id = ra.Amenity.Id,
+                        Name = ra.Amenity.Name
+                    }).ToList()
+                }).FirstOrDefaultAsync(r => r.ID == id);
+        }
+
+        //UPDATE - PUT
         public async Task<Room> UpdateRoom(int id, Room room)
         {
             _context.Entry(room).State = EntityState.Modified;
@@ -73,7 +107,7 @@ namespace Lab12.Models.Services
                 RoomId = roomId,
                 AmenityId = amenityId
             };
-            _context.Entry(room_Amenities).State = EntityState.Deleted
+            _context.Entry(room_Amenities).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
 
         }

@@ -19,32 +19,43 @@ namespace Lab12.Controllers
     [ApiController]
     public class HotelController : ControllerBase
     {
+        private readonly HotelDbContext _context;
         private readonly IHotel _hotel;
 
-        public HotelController(IHotel h)
+        public HotelController(IHotel h, HotelDbContext c)
         {
             //set context to the private context created above
             _hotel = h;
+            _context = c;
         }
+        //POST - CREATE
+        [HttpPost]
+        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
+        {
+            await _hotel.Create(hotel);
 
-        //GET
-        [HttpGet("api/Hotels")]
-        public async Task<ActionResult<IEnumerable<HotelsDto>>> GetHotels()
+            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
+        }
+        //GET ALL
+        [HttpGet]
+        [Route("api/Hotels")]
+        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
         {
             //add a count to the list
             var list = await _hotel.GetHotels();
             return Ok(list);
         }
 
-        //GET: api/Hotels/5
-        [HttpGet("api/Hotels/{id}")]
-        public async Task<ActionResult<HotelsDto>> GetHotel(int id)
+        //GET BY ID
+        [HttpGet("{id}")]
+        [Route("api/Hotels/{id}:")]
+        public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
-            HotelsDto hotel = await _hotel.GetHotel(id);
+            Hotel hotel = await _hotel.GetHotel(id);
             return hotel;
         }
 
-        //PUT 
+        //PUT - UDPATE
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotel( int id, Hotel hotel)
         {
@@ -56,14 +67,6 @@ namespace Lab12.Controllers
             var updateHotel = await _hotel.UpdateHotel(id, hotel);
 
             return Ok(updateHotel);
-        }
-        //POST
-        [HttpPost]
-        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
-        {
-            await _hotel.Create(hotel);
-
-            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
         }
 
         //DELETE

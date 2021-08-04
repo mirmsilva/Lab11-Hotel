@@ -8,15 +8,18 @@ namespace Lab12.Models.Interfaces
 {
     public interface IHotel_Room
     {
+        //CREATE - POST
+        //DTO - in the incoming request
         Task<Hotel_Room> Create(Hotel_Room hotel_room);
 
         //GET ALL
-        Task<List<HotelRoomsDto>> GetHotelRooms();
+        Task<List<Hotel_Room>> GetHotelRooms();
 
         //GET BY ID
-        Task<HotelRoomsDto> GetHotelRoom(int id);
+        Task<Hotel_Room> GetHotelRoom(int id);
 
-        //UPDATE
+        //UPDATE - PUT
+        //DTO- In the incoming request
         Task<HotelRoomsDto> UpdateHotelRoom(int id, int RoomNumber, Hotel_Room hotel_room);
 
         //DELETE

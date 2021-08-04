@@ -17,7 +17,7 @@ namespace Lab12.Models.Services
             _context = context;
         }
         
-        //CREATE
+        //CREATE - POST
         public async Task<Hotel> Create(Hotel hotel)
         {
             _context.Entry(hotel).State = EntityState.Added;
@@ -27,21 +27,21 @@ namespace Lab12.Models.Services
             return hotel;
         }
 
-        //GET HOTEL - ONE BY ID
+        //GET BY ID
         public async Task<Hotel> GetHotel(int id)
         {
             Hotel hotel = await _context.Hotels.FindAsync(id);
             return hotel;
         }
 
-        //GET HOTELS - A LIST
+        //GET ALL
         public async Task<List<Hotel>> GetHotels()
         {
             var hotels = await _context.Hotels.ToListAsync();
             return hotels;
         }
 
-        //UPDATE HOTEL
+        //UPDATE - PUT
         public async Task<Hotel> UpdateHotel(int id, Hotel hotel)
         {
             _context.Entry(hotel).State = EntityState.Modified;
@@ -49,7 +49,7 @@ namespace Lab12.Models.Services
             return hotel;
         }
 
-        //DELETE HOTEL
+        //DELETE
         public async Task Delete(int id)
         {
             Hotel hotel = await GetHotel(id);

@@ -11,7 +11,7 @@ namespace Lab12.Data
     {
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
-        public DbSet<Amenities> Amenities { get; set; }
+        public DbSet<Amenity> Amenities { get; set; }
 
         public DbSet<Hotel_Room> Hotel_Rooms { get; set; }
         public DbSet<Room_Amenities> Room_Amenities { get; set; }
@@ -27,11 +27,11 @@ namespace Lab12.Data
               new Hotel { Id = 1, Name = "Sea Side Inn", StreetAddress = "808 Ocean Drive", City = "Ocean City", State = "OR", Country = "US", Phone = "253-201-2121", TotalRooms = 75 },
               new Hotel { Id = 2, Name = "Harbor Inn", StreetAddress = "213 Harbor Way", City = "Long Beach", State = "OR", Country = "US", Phone = "253-453-2587", TotalRooms = 75 });
             //AMENITIES
-            modelBuilder.Entity<Amenities>().HasData(
-                new Amenities { Id = 1, Name = "MiniBar" },
-                new Amenities { Id = 2, Name = "Coffee Maker" },
-                new Amenities { Id = 3, Name = "AC" },
-                new Amenities { Id = 4, Name = "Iron" });
+            modelBuilder.Entity<Amenity>().HasData(
+                new Amenity { Id = 1, Name = "MiniBar" },
+                new Amenity { Id = 2, Name = "Coffee Maker" },
+                new Amenity { Id = 3, Name = "AC" },
+                new Amenity { Id = 4, Name = "Iron" });
             //ROOM
             modelBuilder.Entity<Room>().HasData(
                 new Room { Id = 1, Name = "Seaside Studio", Size = 0 },

@@ -9,16 +9,16 @@ namespace Lab12.Models.Interfaces
 {
     public interface IHotel
     {
-        //CREATE
+        //CREATE - POST
         Task<Hotel> Create(Hotel hotel);
 
         //GET ALL
-        Task<List<HotelsDto>> GetHotels();
+        Task<List<Hotel>> GetHotels();
 
         //GET BY ID
-        Task<HotelsDto> GetHotel(int id);
+        Task<Hotel> GetHotel(int id);
 
-        //UPDATE
+        //UPDATE - PUT
         Task<Hotel> UpdateHotel(int id, Hotel hotel);
 
         //DELETE

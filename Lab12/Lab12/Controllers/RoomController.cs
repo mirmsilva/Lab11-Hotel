@@ -18,31 +18,43 @@ namespace Lab12.Controllers
     {
         private readonly IRoom _room;
 
-        public RoomController(IRoom r) 
+        public RoomController(IRoom room) 
         {
-            _room = r; 
+            _room = room; 
+        }
+        //POST- CREATE
+        //DTO - RoomsDTO should be included in the request
+        [HttpPost]
+        [Route("api/rooms/")]
+        public async Task<ActionResult<Room>> PostRoom(Room room)
+        {
+            await _room.Create(room);
+            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
 
-        //GET LIST
-        [HttpGet("api/rooms/")]
-        public async Task<ActionResult<IEnumerable<RoomsDto>>> GetRooms()
+        //GET ALL
+        //DTO - Get array of RoomDto Objects
+        [HttpGet]
+        [Route("api/rooms/")]
+        public async Task<ActionResult<IEnumerable<RoomsDto>> GetRooms()
         {   //used this before I had created services & Interfaces
             //return await _context.Room.ToListAsync();
             var list = await _room.GetRooms();
             return Ok(list);
         }
-
         //GET BY ID
-        [HttpGet("api/rooms/{roomId}")]
+        [HttpGet("{id}")]
+        [Route("api/rooms/{roomId}")]
         public async Task<ActionResult<RoomsDto>> GetRoom(int id)
         {
             RoomsDto room = await _room.GetRoom(id);
-            return room; 
+            return room;
         }
 
-        //PUT 
-        [HttpPut("api/rooms/{roomId}")]
-        public async Task<IActionResult> PutRoom(int id, RoomsDto room)
+        //PUT - UPDATE
+        [HttpPut("{id}")]
+        [Route("api/rooms/{roomId}")]
+        public async Task<IActionResult> PutRoom(int id, Room room)
         {
             if (id != room.Id)
             {
@@ -51,16 +63,9 @@ namespace Lab12.Controllers
             var updateRoom = await _room.UpdateRoom(id, room);
             return Ok(updateRoom);
         }
-        //POST
-        [HttpPost("api/rooms/")]
-        public async Task<ActionResult<RoomsDto>> PostRoom(Room room)
-        {
-            await _room.Create(room);
-            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
-        }
 
         //DELETE
-        [HttpDelete("api/rooms/{roomId}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Room>> DeleteRoom(int id)
         {
             await _room.Delete(id);
@@ -73,7 +78,7 @@ namespace Lab12.Controllers
         [Route("{roomId}/Amenity/{amenityId}")]
         public async Task<IActionResult>AddAmenityToRoom( int roomId, int amenityId)
         {
-            await _room.AddAmenityToRoom(roomId, roomId);
+            await _room.AddAmenityToRoom(roomId, amenityId);
             return NoContent();
         }
         

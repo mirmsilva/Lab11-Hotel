@@ -9,43 +9,47 @@ using Lab12.Models.DTOs;
 
 namespace Lab12.Models.Services
 {
-    public class AmenitiesServices : IAmenities
+    public class AmenityServices : IAmenities
     {
         private HotelDbContext _context; 
 
-        public AmenitiesServices(HotelDbContext context)
+        public AmenityServices(HotelDbContext context)
         {
             _context = context;
         }
-        public async Task<AmenitiesDto> Create(AmenitiesDto amenities)
+        //CREATE - POST
+        //DTO - In the request
+        public async Task<AmenitiesDto> Create(Amenity amenities)
         {
             _context.Entry(amenities).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return amenities;
         }
-
-        public async Task<List<AmenitiesDto>> GetAmenities()
+        //GET ALL
+        public async Task<List<Amenity>> GetAmenities()
         {
-            AmenitiesDto amenities = await _context.Amenities.ToListAsync();
+            var amenities = await _context.Amenities.ToListAsync();
             return amenities;
         }
 
-        public async Task<AmenitiesDto> GetAmenity(int id)
+        //GET BY ID
+        public async Task<Amenity> GetAmenity(int id)
         {
-            AmenitiesDto amenity = await _context.Amenities.FindAsync(id);
+            Amenity amenity = await _context.Amenities.FindAsync(id);
             return amenity; 
         }
-
-        public async Task<Amenities> UpdateAmenity(int id, Amenities amenities)
+        //UPDATE - PUT
+        public async Task<Amenity> UpdateAmenity(int id, Amenity amenities)
         {
             _context.Entry(amenities).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return amenities;
         }
 
+        //DELETE
         public async Task Delete(int id)
         {
-            Amenities amenity= await GetAmenity(id);
+            Amenity amenity= await GetAmenity(id);
             _context.Entry(amenity).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }

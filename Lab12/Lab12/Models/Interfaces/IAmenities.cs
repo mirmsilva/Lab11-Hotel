@@ -8,15 +8,16 @@ namespace Lab12.Models.Interfaces
 {
     public interface IAmenities
     {
-        //CREATE
-        Task<AmenitiesDto> Create(Amenities amenities);
+        //CREATE -POST
+        //DTO - In the request
+        Task<AmenitiesDto> Create(Amenity amenities);
         //GET ALL
-        Task<List<AmenitiesDto>> GetAmenities();
+        Task<List<Amenity>> GetAmenities();
         //GET BY ID
-        Task<AmenitiesDto> GetAmenity(int id);
+        Task<Amenity> GetAmenity(int id);
 
-        //UPDATE
-        Task<Amenities> UpdateAmenity(int id, Amenities amenities);
+        //UPDATE -PUT
+        Task<Amenity> UpdateAmenity(int id, Amenity amenities);
 
         //DELETE
         Task Delete(int id);

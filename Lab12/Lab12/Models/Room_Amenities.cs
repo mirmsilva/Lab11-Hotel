@@ -14,7 +14,7 @@ namespace Lab12.Models
 
         //bring in Room & Amenities Objects
         public Room Room { get; set; }
-        public Amenities Amenity { get; set; }
+        public Amenity Amenity { get; set; }
 
     }
 }

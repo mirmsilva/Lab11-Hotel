@@ -22,26 +22,38 @@ namespace Lab12.Controllers
         { 
             _amenity = a;
         }
+        //POST - CREATE
+        //DTO - In the request
+        [HttpPost]
+        [Route("api/amenities/")]
+        public async Task<ActionResult<Amenity>> PostAmenities(Amenity amenity)
+        {
+            await _amenity.Create(amenity);
+
+            return CreatedAtAction("GetAmenity", new { id = amenity.Id }, amenity);
+        }
 
         //GET LIST
-        [HttpGet("api/amenities/")]
-        public async Task<ActionResult<IEnumerable<AmenitiesDto>>> GetAmenities()
+        [HttpGet]
+        [Route("api/amenities/")]
+        public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
         {
             var list = await _amenity.GetAmenities();
             return Ok(list);
         }
 
         //GET BY ID
-        [HttpGet("api/amenities/{id}")]
-        public async Task<ActionResult<AmenitiesDto>> GetAmenity(int id)
+        [HttpGet("{id}")]
+        [Route("api/amenities/{id}")]
+        public async Task<ActionResult<Amenity>> GetAmenity(int id)
         {
-            AmenitiesDto amenity = await _amenity.GetAmenity(id);
+            Amenity amenity = await _amenity.GetAmenity(id);
             return amenity;
         }
 
-        //PUT 
+        //PUT - UPDATE
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAmenities(int id, Amenities amenity)
+        public async Task<IActionResult> PutAmenities(int id, Amenity amenity)
         {
             if( id != amenity.Id)
             {
@@ -51,18 +63,10 @@ namespace Lab12.Controllers
             return Ok(updateAmenity);
 
         }
-        //POST
-        [HttpPost("api/amenities/")]
-        public async Task<ActionResult<Amenities>> PostAmenities(Amenities amenity)
-        {
-            await _amenity.Create(amenity);
-
-            return CreatedAtAction("GetAmenity", new { id =amenity.Id }, amenity);
-        }
 
         //DELETE
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Amenities>> DeleteAmenities(int id)
+        public async Task<ActionResult<Amenity>> DeleteAmenities(int id)
         {
             await _amenity.Delete(id);
 

@@ -34,9 +34,10 @@ namespace Lab12
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+            //Dependency injections
             services.AddTransient<IHotel, HotelService>();
             services.AddTransient<IRoom, RoomServices>();
-            services.AddTransient<IAmenities, AmenitiesServices>();
+            services.AddTransient<IAmenities, AmenityServices>();
             services.AddTransient<IHotel_Room, Hotel_RoomServices>();
             //this came from john on the demo code
             services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
