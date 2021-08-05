@@ -4,24 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Lab12.Data
 {
-    public class HotelDbContext : DbContext
+    //Will now use the Identity Db Context
+    public class HotelDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
-
         public DbSet<Hotel_Room> Hotel_Rooms { get; set; }
         public DbSet<Room_Amenities> Room_Amenities { get; set; }
         public HotelDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //This was boilerplate that we needed to add back in
+            base.OnModelCreating(modelBuilder);
+
             //HOTEL
             modelBuilder.Entity<Hotel>().HasData(
               new Hotel { Id = 1, Name = "Sea Side Inn", StreetAddress = "808 Ocean Drive", City = "Ocean City", State = "OR", Country = "US", Phone = "253-201-2121", TotalRooms = 75 },

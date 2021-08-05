@@ -25,7 +25,6 @@ namespace Lab12
         }
 
         
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -34,11 +33,17 @@ namespace Lab12
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+
+            // ADD SWAGGER HERE
+
             //Dependency injections
             services.AddTransient<IHotel, HotelService>();
             services.AddTransient<IRoom, RoomServices>();
             services.AddTransient<IAmenities, AmenityServices>();
             services.AddTransient<IHotel_Room, Hotel_RoomServices>();
+
+            //Add this for the login portion
+            services.AddTransient<IUser, IdentityUserService>();
             //this came from john on the demo code
             services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
@@ -57,12 +62,7 @@ namespace Lab12
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -70,7 +70,7 @@ namespace Lab12
 
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello");
+                    await context.Response.WriteAsync("Hello Miriam");
                 });
 
                 endpoints.MapGet("/hey", context =>
