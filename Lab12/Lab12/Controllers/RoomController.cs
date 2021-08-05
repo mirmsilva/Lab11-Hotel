@@ -18,9 +18,9 @@ namespace Lab12.Controllers
     {
         private readonly IRoom _room;
 
-        public RoomController(IRoom room) 
+        public RoomController(IRoom r) 
         {
-            _room = room; 
+            _room = r; 
         }
         //POST- CREATE
         //DTO - RoomsDTO should be included in the request
@@ -36,9 +36,8 @@ namespace Lab12.Controllers
         //DTO - Get array of RoomDto Objects
         [HttpGet]
         [Route("api/rooms/")]
-        public async Task<ActionResult<IEnumerable<RoomsDto>> GetRooms()
-        {   //used this before I had created services & Interfaces
-            //return await _context.Room.ToListAsync();
+        public async Task<ActionResult<IEnumerable<RoomsDto>>> GetRooms()
+        {  
             var list = await _room.GetRooms();
             return Ok(list);
         }

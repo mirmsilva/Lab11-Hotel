@@ -10,6 +10,7 @@ namespace Lab12.Models.DTOs
         public int RoomNumber { get; set; }
         public int HotelId { get; set; }
         public int RoomId { get; set; }
+        public RoomsDto Room { get; set; }
 
 
     }

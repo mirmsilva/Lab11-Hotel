@@ -11,8 +11,8 @@ namespace Lab12.Models.Services
 {
     public class RoomServices : IRoom
     {
-        private HotelDbContext _context;
-        private IAmenities _amenities;
+        private readonly HotelDbContext _context;
+        private readonly IAmenities _amenities;
 
         public RoomServices(HotelDbContext context, IAmenities amenities)
         {
@@ -21,7 +21,7 @@ namespace Lab12.Models.Services
         }
         //CREATE - POST
         //DTO - RoomsDTO in request
-        public async Task<RoomsDto> Create(Room room)
+        public async Task<Room> Create(Room room)
         {
             _context.Entry(room).State = EntityState.Added;
             await _context.SaveChangesAsync();
@@ -45,7 +45,6 @@ namespace Lab12.Models.Services
                     {
                         Id = ra.Amenity.Id,
                         Name = ra.Amenity.Name
-
 
                     }).ToList()
                 }).ToListAsync();
@@ -82,7 +81,7 @@ namespace Lab12.Models.Services
         //DELETE
         public async Task Delete(int id)
         {
-            Room room = await GetRoom(id);
+            RoomsDto room = await GetRoom(id);
             _context.Entry(room).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }

@@ -13,7 +13,7 @@ namespace Lab12.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private IUser userService;
+        private readonly IUser userService;
 
         public AccountController(IUser service)
         {

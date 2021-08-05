@@ -13,16 +13,18 @@ namespace Lab12.Models.Interfaces
         Task<Hotel_Room> Create(Hotel_Room hotel_room);
 
         //GET ALL
-        Task<List<Hotel_Room>> GetHotelRooms();
+        //DTO
+        Task<List<HotelRoomsDto>> GetHotelRooms();
 
         //GET BY ID
-        Task<Hotel_Room> GetHotelRoom(int id);
+        //DTO
+        Task<HotelRoomsDto> GetHotelRoom(int hotelId, int roomId);
 
         //UPDATE - PUT
         //DTO- In the incoming request
-        Task<HotelRoomsDto> UpdateHotelRoom(int id, int RoomNumber, Hotel_Room hotel_room);
+        Task<Hotel_Room> UpdateHotelRoom(int id, int RoomNumber, Hotel_Room hotel_room);
 
         //DELETE
-        Task Delete(int id);
+        Task Delete(int hotelId, int roomId);
     }
 }

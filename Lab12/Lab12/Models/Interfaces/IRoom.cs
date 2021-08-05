@@ -10,14 +10,14 @@ namespace Lab12.Models.Interfaces
     {
         //CREATE - POST
         //DTO - RoomsDTO
-        Task<RoomsDto> Create(Room room);
+        Task<Room> Create(Room room);
 
         //GET ALL
         //DTO - GET RoomDto Objects
         Task<List<RoomsDto>> GetRooms();
 
         //GET BY ID
-        
+        //DTO
         Task<RoomsDto> GetRoom(int id);
 
         //UPDATE - PUT

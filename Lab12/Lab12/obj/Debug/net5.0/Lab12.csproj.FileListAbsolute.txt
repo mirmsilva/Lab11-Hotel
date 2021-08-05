@@ -38,3 +38,4 @@ C:\Users\kyleketcham\source\repos\mirmsilva\Lab11-Hotel\Lab12\Lab12\obj\Debug\ne
 C:\Users\kyleketcham\source\repos\mirmsilva\Lab11-Hotel\Lab12\Lab12\obj\Debug\net5.0\Lab12.pdb
 C:\Users\kyleketcham\source\repos\mirmsilva\Lab11-Hotel\Lab12\Lab12\obj\Debug\net5.0\Lab12.genruntimeconfig.cache
 C:\Users\kyleketcham\source\repos\mirmsilva\Lab11-Hotel\Lab12\Lab12\obj\Debug\net5.0\Lab12.csproj.CopyComplete
+C:\Users\kyleketcham\Source\Repos\mirmsilva\Lab11-Hotel\Lab12\Lab12\obj\Debug\net5.0\Lab12.MvcApplicationPartsAssemblyInfo.cs

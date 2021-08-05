@@ -9,7 +9,7 @@ namespace Lab12.Models.DTOs
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public Enum RoomSize { get; set; }
+        public int RoomSize { get; set; }
         public List<AmenitiesDto> Amenities { get; set; }
     }
 }

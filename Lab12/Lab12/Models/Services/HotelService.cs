@@ -10,7 +10,7 @@ namespace Lab12.Models.Services
 {
     public class HotelService : IHotel
     {
-        private HotelDbContext _context;
+        private readonly HotelDbContext _context;
 
         public HotelService(HotelDbContext context)
         {

@@ -11,7 +11,7 @@ namespace Lab12.Models.Services
 {
     public class AmenityServices : IAmenities
     {
-        private HotelDbContext _context; 
+        private readonly HotelDbContext _context; 
 
         public AmenityServices(HotelDbContext context)
         {
@@ -19,7 +19,7 @@ namespace Lab12.Models.Services
         }
         //CREATE - POST
         //DTO - In the request
-        public async Task<AmenitiesDto> Create(Amenity amenities)
+        public async Task<Amenity> Create(Amenity amenities)
         {
             _context.Entry(amenities).State = EntityState.Added;
             await _context.SaveChangesAsync();

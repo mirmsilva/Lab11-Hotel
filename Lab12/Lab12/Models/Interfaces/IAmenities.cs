@@ -10,7 +10,7 @@ namespace Lab12.Models.Interfaces
     {
         //CREATE -POST
         //DTO - In the request
-        Task<AmenitiesDto> Create(Amenity amenities);
+        Task<Amenity> Create(Amenity amenities);
         //GET ALL
         Task<List<Amenity>> GetAmenities();
         //GET BY ID

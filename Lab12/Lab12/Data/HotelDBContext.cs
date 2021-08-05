@@ -38,8 +38,8 @@ namespace Lab12.Data
             //ROOM
             modelBuilder.Entity<Room>().HasData(
                 new Room { Id = 1, Name = "Seaside Studio", Size = 0 },
-                new Room { Id = 2, Name = "Beach Side Room", Size = (RoomSize)1 },
-                new Room { Id = 3, Name = "Sandy Penthouse", Size =(RoomSize) 2 });
+                new Room { Id = 2, Name = "Beach Side Room", Size = 1 },
+                new Room { Id = 3, Name = "Sandy Penthouse", Size =2 });
             
             //ROOM AMENITIES
             modelBuilder.Entity<Room_Amenities>().HasKey(

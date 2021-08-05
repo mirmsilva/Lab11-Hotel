@@ -38,9 +38,10 @@ namespace Lab12.Controllers
         }
 
         //GET ALL
+        //DTO
         [HttpGet]
         [Route("/api/Hotels/{hotelId}/Rooms")]
-        public async Task<ActionResult<IEnumerable<Hotel_Room>>> GetHotelRooms()
+        public async Task<ActionResult<IEnumerable<HotelRoomsDto>>> GetHotelRooms()
         {
             //add a count to the list
             var list = await _hotelRoom.GetHotelRooms();
@@ -48,11 +49,12 @@ namespace Lab12.Controllers
         }
 
         //GET BY ID
+        //DTO
         [HttpGet("{id}")]
         [Route("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
-        public async Task<ActionResult<Hotel_Room>> GetHotelRoom(int id)
+        public async Task<ActionResult<HotelRoomsDto>> GetHotelRoom( int hotelId, int roomId)
         {
-            Hotel_Room hotel_room = await _hotelRoom.GetHotelRoom(id);
+            HotelRoomsDto hotel_room = await _hotelRoom.GetHotelRoom(hotelId, roomId);
             return hotel_room;
         }
 
@@ -75,9 +77,9 @@ namespace Lab12.Controllers
         //DELETE
         [HttpDelete("{id}")]
         [Route("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
-        public async Task<ActionResult<Hotel_Room>> DeleteHotelRoom (int id)
+        public async Task<ActionResult<Hotel_Room>> DeleteHotelRoom (int hotelId, int roomId)
         {
-            await _hotelRoom.Delete(id);
+            await _hotelRoom.Delete(hotelId, roomId);
             return NoContent();
         }
     }
