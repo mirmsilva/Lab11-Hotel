@@ -13,6 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using Lab12.Models.Services;
 using Lab12.Models.Interfaces;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity;
+using Lab12.Models;
+using Microsoft.OpenApi.Models;
 
 namespace Lab12
 {
@@ -35,6 +38,22 @@ namespace Lab12
             });
 
             // ADD SWAGGER HERE
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "Async Inn",
+                    Version = "v1",
+                });
+            });
+
+
+            //IDENTITY 
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                // Other things are possible
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<HotelDbContext>();
 
             //Dependency injections
             services.AddTransient<IHotel, HotelService>();
@@ -55,29 +74,22 @@ namespace Lab12
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
+            //SWAGGER - ROUTE
+            app.UseSwagger(options =>{
+                options.RouteTemplate = "/api/v1/swagger.json";
+            });
+
+            //SWAGGER - DOCUMENTATION
+            app.UseSwaggerUI(options =>{
+                options.SwaggerEndpoint("/api/v1/swagger.json", "Async Inn");
+                options.RoutePrefix = "";
+            });
+
+            app.UseEndpoints(endpoints =>{
                 endpoints.MapControllers();
-
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello Miriam");
-                });
-
-                endpoints.MapGet("/hey", context =>
-                {
-                    throw new InvalidOperationException("boooyah!");
-
-                });
             });
         }
     }
