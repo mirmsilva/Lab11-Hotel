@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab12.Models.DTOs
 {
+    //This will be used by the register method to create an account
     public class RegisterUserDto
     {
         [Required]

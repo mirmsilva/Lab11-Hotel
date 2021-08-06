@@ -12,6 +12,7 @@ namespace Lab12.Models.Services
     public class Hotel_RoomServices : IHotel_Room
     {
         private readonly HotelDbContext _context;
+
         //CREATE - POST
         //DTO - in the incoming request
         public async Task<Hotel_Room> Create(Hotel_Room hotel_room)

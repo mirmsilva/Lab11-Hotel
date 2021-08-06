@@ -33,7 +33,7 @@ namespace Lab12.Models.Services
             }
             return null;
         }
-
+        //ModelStateDictionary allows us to create unlimited key/value pairs to indicate the state of data model
         public async Task<UserDto> Register(RegisterUserDto data, ModelStateDictionary modelState)
         {
             var user = new ApplicationUser
@@ -52,7 +52,8 @@ namespace Lab12.Models.Services
                     Username = user.UserName
                 };
             }
-
+            //dictionary of error keys
+            //This is boilerplate
             foreach (var error in result.Errors)
             {
                 var errorKey =

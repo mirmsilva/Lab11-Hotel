@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kyleketcham\\Source\\Repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj": {}
+    "C:\\Users\\kyleketcham\\source\\repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kyleketcham\\Source\\Repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj": {
+    "C:\\Users\\kyleketcham\\source\\repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kyleketcham\\Source\\Repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj",
+        "projectUniqueName": "C:\\Users\\kyleketcham\\source\\repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj",
         "projectName": "Lab12",
-        "projectPath": "C:\\Users\\kyleketcham\\Source\\Repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj",
+        "projectPath": "C:\\Users\\kyleketcham\\source\\repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\Lab12.csproj",
         "packagesPath": "C:\\Users\\kyleketcham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kyleketcham\\Source\\Repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\obj\\",
+        "outputPath": "C:\\Users\\kyleketcham\\source\\repos\\mirmsilva\\Lab11-Hotel\\Lab12\\Lab12\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

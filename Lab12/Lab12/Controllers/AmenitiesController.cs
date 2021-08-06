@@ -24,8 +24,7 @@ namespace Lab12.Controllers
         }
         //POST - CREATE
         //DTO - In the request
-        [HttpPost]
-        [Route("api/amenities/")]
+        [HttpPost("api/amenities/{amenity}")]
         public async Task<ActionResult<Amenity>> PostAmenities(Amenity amenity)
         {
             await _amenity.Create(amenity);
@@ -34,8 +33,7 @@ namespace Lab12.Controllers
         }
 
         //GET LIST
-        [HttpGet]
-        [Route("api/amenities/")]
+        [HttpGet("api/amenities/")]
         public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
         {
             var list = await _amenity.GetAmenities();
@@ -43,8 +41,7 @@ namespace Lab12.Controllers
         }
 
         //GET BY ID
-        [HttpGet("{id}")]
-        [Route("api/amenities/{id}")]
+        [HttpGet("api/amenities/{id}")]
         public async Task<ActionResult<Amenity>> GetAmenity(int id)
         {
             Amenity amenity = await _amenity.GetAmenity(id);

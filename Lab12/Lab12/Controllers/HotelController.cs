@@ -29,7 +29,7 @@ namespace Lab12.Controllers
             _context = c;
         }
         //POST - CREATE
-        [HttpPost]
+        [HttpPost("api/Hotel")]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
             await _hotel.Create(hotel);
@@ -37,8 +37,7 @@ namespace Lab12.Controllers
             return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
         }
         //GET ALL
-        [HttpGet]
-        [Route("api/Hotels")]
+        [HttpGet("api/Hotels")]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
         {
             //add a count to the list
@@ -47,8 +46,7 @@ namespace Lab12.Controllers
         }
 
         //GET BY ID
-        [HttpGet("{id}")]
-        [Route("api/Hotels/{id}:")]
+        [HttpGet("api/Hotels/{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
             Hotel hotel = await _hotel.GetHotel(id);
@@ -56,7 +54,7 @@ namespace Lab12.Controllers
         }
 
         //PUT - UDPATE
-        [HttpPut("{id}")]
+        [HttpPut("api/id/{id}/Hotel/{hotel}")]
         public async Task<IActionResult> PutHotel( int id, Hotel hotel)
         {
             if (id != hotel.Id)
@@ -70,7 +68,7 @@ namespace Lab12.Controllers
         }
 
         //DELETE
-        [HttpDelete("{id}")]
+        [HttpDelete("api/Hotels/{id}")]
         public async Task<ActionResult<Hotel>> DeleteHotel (int id)
         {
             await _hotel.Delete(id);

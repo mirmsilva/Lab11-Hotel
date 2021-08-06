@@ -79,7 +79,7 @@ namespace Lab12
 
             //SWAGGER - ROUTE
             app.UseSwagger(options =>{
-                options.RouteTemplate = "/api/v1/swagger.json";
+                options.RouteTemplate = "/api/{documentName}/swagger.json";
             });
 
             //SWAGGER - DOCUMENTATION

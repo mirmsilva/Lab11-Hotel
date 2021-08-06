@@ -27,13 +27,6 @@ namespace Lab12.Models.Services
             return hotel;
         }
 
-        //GET BY ID
-        public async Task<Hotel> GetHotel(int id)
-        {
-            Hotel hotel = await _context.Hotels.FindAsync(id);
-            return hotel;
-        }
-
         //GET ALL
         public async Task<List<Hotel>> GetHotels()
         {
@@ -41,6 +34,12 @@ namespace Lab12.Models.Services
             return hotels;
         }
 
+        //GET BY ID
+        public async Task<Hotel> GetHotel(int id)
+        {
+            Hotel hotel = await _context.Hotels.FindAsync(id);
+            return hotel;
+        }
         //UPDATE - PUT
         public async Task<Hotel> UpdateHotel(int id, Hotel hotel)
         {
