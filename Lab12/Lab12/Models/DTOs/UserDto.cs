@@ -10,5 +10,10 @@ namespace Lab12.Models.DTOs
     {
         public string Id { get; set; }
         public string Username { get; set; }
+
+        //Add Token
+        public string Token { get; set; }
+        //Add Roles
+        public IList<string> Roles { get; set; }
     }
 }

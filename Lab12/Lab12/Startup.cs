@@ -16,12 +16,14 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity;
 using Lab12.Models;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Lab12
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -47,13 +49,33 @@ namespace Lab12
                 });
             });
 
-
             //IDENTITY 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                // Other things are possible
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<HotelDbContext>();
+
+            //AUTHENTICATION Services
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    // Tell the authenticaion scheme "how/where" to validate the token + secret
+                    options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration);
+                });
+            //AUTHORIZATION Services
+            services.AddAuthorization(options =>
+            {
+                // Add "Name of Policy", and the Lambda returns a definition
+                options.AddPolicy("create", policy => policy.RequireClaim("permissions", "create"));
+                options.AddPolicy("read", policy => policy.RequireClaim("permissions", "read"));
+                options.AddPolicy("update", policy => policy.RequireClaim("permissions", "update"));
+                options.AddPolicy("delete", policy => policy.RequireClaim("permissions", "delete"));
+            });
 
             //Dependency injections
             services.AddTransient<IHotel, HotelService>();
@@ -63,6 +85,11 @@ namespace Lab12
 
             //Add this for the login portion
             services.AddTransient<IUser, IdentityUserService>();
+
+            //This is for the token
+            services.AddScoped<JwtTokenService>();
+
+
             //this came from john on the demo code
             services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
@@ -76,6 +103,10 @@ namespace Lab12
             }
 
             app.UseRouting();
+
+            //AUTHENTICATION & AUTHORIZATION
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             //SWAGGER - ROUTE
             app.UseSwagger(options =>{

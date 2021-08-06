@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lab12.Data
 {
@@ -39,8 +40,8 @@ namespace Lab12.Data
             modelBuilder.Entity<Room>().HasData(
                 new Room { Id = 1, Name = "Seaside Studio", Size = 0 },
                 new Room { Id = 2, Name = "Beach Side Room", Size = 1 },
-                new Room { Id = 3, Name = "Sandy Penthouse", Size =2 });
-            
+                new Room { Id = 3, Name = "Sandy Penthouse", Size = 2 });
+
             //ROOM AMENITIES
             modelBuilder.Entity<Room_Amenities>().HasKey(
                 roomAmenity => new { roomAmenity.RoomId, roomAmenity.AmenityId });
@@ -53,6 +54,39 @@ namespace Lab12.Data
                 new Hotel_Room { HotelId = 1, RoomId = 2, RoomNumber = 100 },
                 new Hotel_Room { HotelId = 1, RoomId = 3, RoomNumber = 101 },
                 new Hotel_Room { HotelId = 2, RoomId = 2, RoomNumber = 102 });
+
+            //CALL SEED TO CREATE USERS AND ASSIGN THEM PERMISSIONS
+            SeedRole(modelBuilder, "District Manager", "create", "read", "update", "delete");
+            SeedRole(modelBuilder, "Propery Manager", "create","read", "update");
+            SeedRole(modelBuilder, "Agent", "read", "update");
+            SeedRole(modelBuilder, "Anonymous", "read");
+        }
+
+        private int nextId = 1;
+        public void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+        {
+
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(role);
+
+            var roleClaims = permissions.Select(permission =>
+              new IdentityRoleClaim<string>
+              {
+                  Id = nextId++,
+                  RoleId = role.Id,
+                  ClaimType = "permissions", //This matches the permissions we made in startup
+                  ClaimValue = permission
+              }
+            ).ToArray();
+
+            modelBuilder.Entity<IdentityRoleClaim<string>>().HasData(roleClaims);
         }
     }
 }

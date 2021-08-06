@@ -1,5 +1,6 @@
 ﻿using Lab12.Models.DTOs;
 using Lab12.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,6 +45,15 @@ namespace Lab12.Controllers
                 return Unauthorized();
             }
             return user;
+        }
+
+        //AUTHORIZATION
+        //Only available if you've been assigned permission/role
+        [Authorize(Policy = "update")] 
+        [HttpGet("me")]
+        public async Task<ActionResult<UserDto>> Me()
+        {
+            return await userService.GetUserAsync(this.User);
         }
 
 

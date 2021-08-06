@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Lab12.Models.Services
@@ -12,23 +13,29 @@ namespace Lab12.Models.Services
     public class IdentityUserService : IUser
     {
         private UserManager<ApplicationUser> userManager;
+        //Bring in the tokenService
+        private JwtTokenService tokenService;
 
-        public IdentityUserService(UserManager<ApplicationUser> manager)
+        //Add Tokenservice to the parameter
+        public IdentityUserService(UserManager<ApplicationUser> manager, JwtTokenService jwtTokenService)
         {
             userManager = manager;
+            tokenService = jwtTokenService;
         }
+
         public async Task<UserDto> Login(string username, string password)
         {
-            // 1. Is the user in the database (registered?)
+            // CHECK IF THE USER IS IN THE DB
             var user = await userManager.FindByNameAsync(username);
-
-            // Is the password legit?
+            // CHECK IF THE PASSWORD IS LEGIT
             if (await userManager.CheckPasswordAsync(user, password))
             {
                 return new UserDto
                 {
                     Id = user.Id,
-                    Username = user.UserName
+                    Username = user.UserName,
+                    //Add the token property you added to userDto
+                    Token = await tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(60))
                 };
             }
             return null;
@@ -46,10 +53,14 @@ namespace Lab12.Models.Services
 
             if (result.Succeeded)
             {
+                await userManager.AddToRolesAsync(user, data.Roles);
+
                 return new UserDto
                 {
                     Id = user.Id,
-                    Username = user.UserName
+                    Username = user.UserName,
+                    Token = await tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(30)),
+                    Roles = await userManager.GetRolesAsync(user)
                 };
             }
             //dictionary of error keys
@@ -65,6 +76,15 @@ namespace Lab12.Models.Services
                 modelState.AddModelError(errorKey, error.Description);
             }
             return null;
+        }
+        public async Task<UserDto> GetUserAsync(ClaimsPrincipal principal)
+        {
+            var user = await userManager.GetUserAsync(principal);
+            return new UserDto
+            {
+                Id = user.Id,
+                Username = user.UserName
+            };
         }
 
     }
