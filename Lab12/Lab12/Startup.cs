@@ -48,6 +48,7 @@ namespace Lab12
                     Version = "v1",
                 });
             });
+            
 
             //IDENTITY 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

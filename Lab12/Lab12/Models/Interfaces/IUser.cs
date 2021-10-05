@@ -15,4 +15,4 @@ namespace Lab12.Models.Interfaces
         public Task<UserDto> GetUserAsync(ClaimsPrincipal principal);
     }
 }
-}
+

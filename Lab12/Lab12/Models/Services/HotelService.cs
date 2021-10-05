@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Lab12.Data;
+using Lab12.Models.DTOs;
 
 namespace Lab12.Models.Services
 {
@@ -40,6 +41,17 @@ namespace Lab12.Models.Services
             Hotel hotel = await _context.Hotels.FindAsync(id);
             return hotel;
         }
+        //GET BY NAME
+        public async Task<HotelSmsDto> GetHotelByName(string name)
+        {
+            return await _context.Hotels
+                .Select(hr => new HotelSmsDto
+                {
+                    Name = hr.Name,
+                    StreetAddress = hr.StreetAddress
+                }).FirstOrDefaultAsync(hr => hr.Name == name);
+        }
+
         //UPDATE - PUT
         public async Task<Hotel> UpdateHotel(int id, Hotel hotel)
         {

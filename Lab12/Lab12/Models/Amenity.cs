@@ -11,7 +11,7 @@ namespace Lab12.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List <Room_Amenities> Room_Amenities { get; set; }
+        //public List <Room_Amenities> Room_Amenities { get; set; }
 
  
 

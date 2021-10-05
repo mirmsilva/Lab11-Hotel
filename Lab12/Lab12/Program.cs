@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace Lab12
 {
@@ -16,6 +18,7 @@ namespace Lab12
     {
         public static void Main(string[] args)
         {
+
             var host = CreateHostBuilder(args).Build();
 
             UpdateDatabase(host.Services);
@@ -32,11 +35,13 @@ namespace Lab12
                 }
             }
         }
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+        
                 });
     }
 }

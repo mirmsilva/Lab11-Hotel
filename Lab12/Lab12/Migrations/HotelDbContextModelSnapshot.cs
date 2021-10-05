@@ -165,7 +165,7 @@ namespace Lab12.Migrations
                             Id = 1,
                             City = "Ocean City",
                             Country = "US",
-                            Name = "Sea Side Inn",
+                            Name = "SeaSideInn",
                             Phone = "253-201-2121",
                             State = "OR",
                             StreetAddress = "808 Ocean Drive",
@@ -174,12 +174,34 @@ namespace Lab12.Migrations
                         new
                         {
                             Id = 2,
-                            City = "Long Beach",
+                            City = "Newport",
                             Country = "US",
-                            Name = "Harbor Inn",
+                            Name = "HarborInn",
                             Phone = "253-453-2587",
                             State = "OR",
                             StreetAddress = "213 Harbor Way",
+                            TotalRooms = 75
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Long Beach",
+                            Country = "US",
+                            Name = "OceanSide",
+                            Phone = "253-453-2587",
+                            State = "OR",
+                            StreetAddress = "800 Main st",
+                            TotalRooms = 75
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "North Shore",
+                            Country = "US",
+                            Name = "BeachSide",
+                            Phone = "253-453-2587",
+                            State = "OR",
+                            StreetAddress = "1 Beach Dr",
                             TotalRooms = 75
                         });
                 });
@@ -303,6 +325,36 @@ namespace Lab12.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "district manager",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "District Manager",
+                            NormalizedName = "DISTRICT MANAGER"
+                        },
+                        new
+                        {
+                            Id = "propery manager",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "Propery Manager",
+                            NormalizedName = "PROPERY MANAGER"
+                        },
+                        new
+                        {
+                            Id = "agent",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "Agent",
+                            NormalizedName = "AGENT"
+                        },
+                        new
+                        {
+                            Id = "anonymous",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "Anonymous",
+                            NormalizedName = "ANONYMOUS"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -327,6 +379,78 @@ namespace Lab12.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "permissions",
+                            ClaimValue = "create",
+                            RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "permissions",
+                            ClaimValue = "read",
+                            RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "permissions",
+                            ClaimValue = "update",
+                            RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "permissions",
+                            ClaimValue = "delete",
+                            RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClaimType = "permissions",
+                            ClaimValue = "create",
+                            RoleId = "propery manager"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClaimType = "permissions",
+                            ClaimValue = "read",
+                            RoleId = "propery manager"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClaimType = "permissions",
+                            ClaimValue = "update",
+                            RoleId = "propery manager"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ClaimType = "permissions",
+                            ClaimValue = "read",
+                            RoleId = "agent"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ClaimType = "permissions",
+                            ClaimValue = "update",
+                            RoleId = "agent"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ClaimType = "permissions",
+                            ClaimValue = "read",
+                            RoleId = "anonymous"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

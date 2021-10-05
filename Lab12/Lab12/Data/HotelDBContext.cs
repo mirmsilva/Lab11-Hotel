@@ -28,8 +28,10 @@ namespace Lab12.Data
 
             //HOTEL
             modelBuilder.Entity<Hotel>().HasData(
-              new Hotel { Id = 1, Name = "Sea Side Inn", StreetAddress = "808 Ocean Drive", City = "Ocean City", State = "OR", Country = "US", Phone = "253-201-2121", TotalRooms = 75 },
-              new Hotel { Id = 2, Name = "Harbor Inn", StreetAddress = "213 Harbor Way", City = "Long Beach", State = "OR", Country = "US", Phone = "253-453-2587", TotalRooms = 75 });
+              new Hotel { Id = 1, Name = "SeaSideInn", StreetAddress = "808 Ocean Drive", City = "Ocean City", State = "OR", Country = "US", Phone = "253-201-2121", TotalRooms = 75 },
+              new Hotel { Id = 2, Name = "HarborInn", StreetAddress = "213 Harbor Way", City = "Newport", State = "OR", Country = "US", Phone = "253-453-2587", TotalRooms = 75 },
+              new Hotel { Id = 3, Name = "OceanSide", StreetAddress = "800 Main st", City = "Long Beach", State = "OR", Country = "US", Phone = "253-453-2587", TotalRooms = 75 },
+              new Hotel { Id = 5, Name = "BeachSide", StreetAddress = "1 Beach Dr", City = "North Shore", State = "OR", Country = "US", Phone = "253-453-2587", TotalRooms = 75 });
             //AMENITIES
             modelBuilder.Entity<Amenity>().HasData(
                 new Amenity { Id = 1, Name = "MiniBar" },

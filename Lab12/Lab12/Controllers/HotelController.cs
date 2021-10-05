@@ -53,6 +53,17 @@ namespace Lab12.Controllers
             return hotel;
         }
 
+        //GET BY NAME
+        [HttpGet("{name}")]
+        public async Task<ActionResult<HotelSmsDto>> GetHotelByName( string name)
+        {
+            HotelSmsDto hotel = await _hotel.GetHotelByName(name);
+            return hotel;
+        }
+
+
+
+
         //PUT - UDPATE
         [HttpPut("api/id/{id}/Hotel/{hotel}")]
         public async Task<IActionResult> PutHotel( int id, Hotel hotel)

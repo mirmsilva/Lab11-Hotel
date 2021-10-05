@@ -18,6 +18,10 @@ namespace Lab12.Models.Interfaces
         //GET BY ID
         Task<Hotel> GetHotel(int id);
 
+        //GET BY NAME
+        Task<HotelSmsDto> GetHotelByName(string name);
+
+
         //UPDATE - PUT
         Task<Hotel> UpdateHotel(int id, Hotel hotel);
 

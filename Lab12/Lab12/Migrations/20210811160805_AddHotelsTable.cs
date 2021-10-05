@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lab12.Migrations
 {
-    public partial class init : Migration
+    public partial class AddHotelsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -259,12 +259,25 @@ namespace Lab12.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "district manager", "00000000-0000-0000-0000-000000000000", "District Manager", "DISTRICT MANAGER" },
+                    { "propery manager", "00000000-0000-0000-0000-000000000000", "Propery Manager", "PROPERY MANAGER" },
+                    { "agent", "00000000-0000-0000-0000-000000000000", "Agent", "AGENT" },
+                    { "anonymous", "00000000-0000-0000-0000-000000000000", "Anonymous", "ANONYMOUS" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Hotels",
                 columns: new[] { "Id", "City", "Country", "Name", "Phone", "State", "StreetAddress", "TotalRooms" },
                 values: new object[,]
                 {
-                    { 1, "Ocean City", "US", "Sea Side Inn", "253-201-2121", "OR", "808 Ocean Drive", 75 },
-                    { 2, "Long Beach", "US", "Harbor Inn", "253-453-2587", "OR", "213 Harbor Way", 75 }
+                    { 1, "Ocean City", "US", "SeaSideInn", "253-201-2121", "OR", "808 Ocean Drive", 75 },
+                    { 2, "Newport", "US", "HarborInn", "253-453-2587", "OR", "213 Harbor Way", 75 },
+                    { 3, "Long Beach", "US", "OceanSide", "253-453-2587", "OR", "800 Main st", 75 },
+                    { 5, "North Shore", "US", "BeachSide", "253-453-2587", "OR", "1 Beach Dr", 75 }
                 });
 
             migrationBuilder.InsertData(
@@ -278,14 +291,30 @@ namespace Lab12.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Hotel_Rooms",
-                columns: new[] { "HotelId", "RoomId", "RoomNumber" },
-                values: new object[] { 2, 2, 102 });
+                table: "AspNetRoleClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "permissions", "create", "district manager" },
+                    { 2, "permissions", "read", "district manager" },
+                    { 3, "permissions", "update", "district manager" },
+                    { 4, "permissions", "delete", "district manager" },
+                    { 5, "permissions", "create", "propery manager" },
+                    { 6, "permissions", "read", "propery manager" },
+                    { 7, "permissions", "update", "propery manager" },
+                    { 8, "permissions", "read", "agent" },
+                    { 9, "permissions", "update", "agent" },
+                    { 10, "permissions", "read", "anonymous" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Hotel_Rooms",
                 columns: new[] { "HotelId", "RoomId", "RoomNumber" },
-                values: new object[] { 1, 3, 101 });
+                values: new object[,]
+                {
+                    { 2, 2, 102 },
+                    { 1, 3, 101 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
